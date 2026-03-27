@@ -8,22 +8,29 @@ public class StunEffect implements StatusEffect {
     
     public StunEffect() {
         // Initialize duration to 2 (current turn + next turn)
+        this.duration = 2;
     }
     
     @Override
     public int getDuration() {
         // Return the current duration value
+        return this.duration;
     }
     
     @Override
     public void decrementDuration() {
         // Check if duration is greater than 0
-        // If so, decrement duration by 1
+        if (duration > 0)
+        {
+            // If so, decrement duration by 1
+            duration--;
+        }
     }
     
     @Override
     public boolean isExpired() {
         // Return true if duration is less than or equal to 0, false otherwise
+        return (duration <= 0);
     }
     
     @Override
@@ -40,5 +47,6 @@ public class StunEffect implements StatusEffect {
     @Override
     public String getName() {
         // Return the predefined effect name constant
+        return EFFECT_NAME;
     }
 }

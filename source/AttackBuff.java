@@ -10,12 +10,15 @@ public class AttackBuff implements StatusEffect {
     
     public AttackBuff(int attackIncrease) {
         // Store the attack increase amount
+        this.attackIncrease = attackIncrease;
         // Set duration to -1 to indicate permanent effect (until level ends)
+        this.duration = -1;
     }
     
     @Override
     public int getDuration() {
         // Return the current duration value (will be -1 for permanent effects)
+        return this.duration;
     }
     
     @Override
@@ -26,23 +29,33 @@ public class AttackBuff implements StatusEffect {
     @Override
     public boolean isExpired() {
         // Return false since this effect never expires naturally
+        return false;
     }
     
     @Override
     public void apply(Combatant combatant) {
         // Validate that combatant is not null
-        // If valid, increase the combatant's attack stat by the attack increase amount
+        if (combatant != null)
+        {    
+            // If valid, increase the combatant's attack stat by the attack increase amount
+            combatant.setAttack(combatant.getAttack() + attackIncrease);
+        }
     }
     
     @Override
     public void remove(Combatant combatant) {
         // Validate that combatant is not null
-        // If valid, decrease the combatant's attack stat by the attack increase amount
+        if (combatant != null)
+        {
+            // If valid, decrease the combatant's attack stat by the attack increase amount
+            combatant.setAttack(combatant.getAttack() - attackIncrease);
+        }
     }
     
     @Override
     public String getName() {
         // Return the predefined effect name constant
+        return EFFECT_NAME;
     }
     
     /**
@@ -52,5 +65,6 @@ public class AttackBuff implements StatusEffect {
      */
     public int getAttackIncrease() {
         // Return the stored attack increase amount
+        return this.attackIncrease;
     }
 }
